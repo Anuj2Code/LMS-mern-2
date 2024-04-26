@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import {thunk} from "redux-thunk";
-// import { composeWithDevToolsDevelopmentOnly } from '@redux-devtools/extension';
-import { composeWithDevTools } from "redux-devtools-extension";
+import { composeWithDevToolsDevelopmentOnly } from '@redux-devtools/extension';
+// import { composeWithDevTools } from "redux-devtools-extension";
 import {CourseReducer,courseDetailsReducer,newReviewReducer,reviewDelete} from './reducers/Course'
 import {loginReducer,forgotPasswordReducer,allUsersReducer,userDetailsReducer,updateReducer,contactReducer} from  './reducers/Auth'
 import {createOrder,MyOrder} from './reducers/Order'
@@ -38,7 +38,7 @@ const middleware= [thunk]
 const store = createStore(
   reducer,
   initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
+  composeWithDevToolsDevelopmentOnly(applyMiddleware(...middleware))
 );
 
 export default store;
