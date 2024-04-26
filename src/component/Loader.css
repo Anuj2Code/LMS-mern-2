@@ -1,0 +1,21 @@
+#svg{
+    stroke:#fff;
+    fill-opacity:0;
+    stroke-width:3px;
+    stroke-dasharray: 4500;
+    animation: draw 8s ease ;
+}
+
+@keyframes draw {
+    0% {
+      stroke-dashoffset: 4500;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+.sg{
+    -webkit-text-stroke: 2px blue; 
+     color :black;
+}
