@@ -5,6 +5,7 @@ import im3 from "../Images/kholi.webp";
 import im4 from "../Images/dhoni.jpg";
 import Tilt from 'react-parallax-tilt';
 import { Glow ,GlowCapture} from '@codaworks/react-glow'
+import {Link} from 'react-router-dom'
 
 const Growthbanner = () => {
   return (
@@ -21,9 +22,11 @@ const Growthbanner = () => {
                 Choose CourseHUB for an unparalleled learning experience.
                 </p>
                 <div className="mt-[30px] z-50 ">
+                  <Link to={'/contact'}>
                   <button className=" text w-[170px] h-[45px] text-[17px] hover:scale-105 rounded-2xl bg-[#1e40af] text-white  ">
                     Let's Connect
                   </button>
+                  </Link>
                 </div>
               </div>
               </div>

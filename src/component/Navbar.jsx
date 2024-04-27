@@ -37,7 +37,7 @@ const Navbar = () => {
   return (
     <>
       <div className=" w-[100vw] h-[70px]  justify-around shadow-md shadow-blue-500/50 flex  ">
-        <ToastContainer />
+        <ToastContainer theme="dark"/>
         <AnimatePresence mode="wait">
               {slide && (
                 <motion.div

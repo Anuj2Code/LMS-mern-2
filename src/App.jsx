@@ -30,6 +30,7 @@ import EditProfile from './component/EditProfile';
 import UpdatePassword from './component/UpdatePassword';
 import Footer from './component/Footer';
 import Contact from './component/Contact';
+import Pagenot from './component/Pagenot';
 
 const App = () => {
  let i = "";
@@ -67,6 +68,7 @@ const App = () => {
       <Route path='/rest' element={<Rest/>}></Route>
       <Route path='/det/:id' element={<BookDet/>}></Route>
       <Route path='/contact' element={<Contact/>}></Route>
+      <Route path='*' element={<Pagenot/>}></Route>
       <Route path='/re/:id' element={<GiveRe/>}></Route>
       <Route path='/myAd' element={<MyAd/>}></Route>
       <Route path='/articles' element={<Googles/>}></Route>

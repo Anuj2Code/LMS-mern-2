@@ -65,7 +65,7 @@ const {error,loading,ok,message} = useSelector((state)=> state.for)
             type="text"
             value={conf}
             onChange={(e) => setConf(e.target.value)}
-            placeholder="Email ..."
+            placeholder="confirm password ..."
             className="bg-black w-[80%] rounded-xl p-[10px] h-[60px] text-[#779daa] border-[#202329] border-[1px] "
           />
           <button

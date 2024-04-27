@@ -16,7 +16,7 @@ export const NewsReducer = (state = { news: [] }, action) => {
         return {
           loading: false,
           news:action.payload,
-          total:action.payload.totalResults,
+          total:action.payload.results,
         };
       case NEWS_FAIL:
         return {

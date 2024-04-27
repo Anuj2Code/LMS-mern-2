@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import { Glow, GlowCapture } from "@codaworks/react-glow";
+import {Link} from 'react-router-dom'
 
 const GrowthBanner2 = () => {
   return (
@@ -15,7 +16,7 @@ const GrowthBanner2 = () => {
       <GlowCapture>
           <Glow >
             <div className="glow:bg-[#23c45c] max-[804px]:mt-[259px]  overflow-hidden shadow-xl  w-[80%] hover:border-4 hover:border-[#23c45c] flex min-[1011px]:mt-[75px] justify-center rounded-[35px] items-center relative left-[11vw] h-[600px] gap-12">
-              <div className="max-[804px]:w-[76%] w-[40%] h-[100%] ml-[25px] flex flex-col gap-[15px] justify-center max-[804px]:w-[76%] ">
+              <div className="max-[804px]:w-[76%] w-[40%] h-[100%] ml-[25px] flex flex-col gap-[15px] justify-center  ">
                 <h1 className=" text-[20px] text-[#23c45c] font-semibold ">
                   Who are We
                 </h1>
@@ -28,9 +29,11 @@ const GrowthBanner2 = () => {
                   are and how we're shaping the future of coding education.
                 </p>
                 <div className="mt-[30px] z-50 ">
+                  <Link to={'/contact'}>
                   <button className=" text w-[170px] h-[45px] text-[17px] hover:scale-105 rounded-2xl bg-[#1e40af] text-white  ">
                     Let's Connect
                   </button>
+                  </Link>
                 </div>
               </div>
               <div className="w-[60%] flex flex-col items-center  z-50 max-[804px]:hidden">

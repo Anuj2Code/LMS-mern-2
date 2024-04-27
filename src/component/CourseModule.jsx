@@ -50,6 +50,7 @@ const CourseModule = () => {
     dispatch(getCourseDetails(id));
   }, [dispatch, id]);
 
+
   let id1 = "";
   let username = "";
   let url = "";
@@ -65,14 +66,15 @@ const CourseModule = () => {
   }
  const [id5,setid5] = useState("")
 
-  const reviewSubmitHandler = () => {
-    const myForm = new FormData();
-    console.log(id5);
-    myForm.set("ques", ques);
-    myForm.set("reply", reply);
-    dispatch(newReview(myForm, id, lectId, id5, id1, username, url));
-    setQues("");
-  };
+ const reviewSubmitHandler = () => {
+  const myForm = new FormData();
+  console.log(id5);
+  myForm.set("ques", ques);
+  myForm.set("reply", reply);
+  dispatch(newReview(myForm, id, lectId, id5, id1, username, url));
+  setQues("");
+}; 
+
 
   const [quesId, setques] = useState("");
   const [slide, setSlide] = useState(false);
@@ -86,6 +88,7 @@ const CourseModule = () => {
     setDescription("");
   };
 
+  
   const deleteNo = () => {
     dispatch(removeNotes(id, id1, lectId, quesId));
   };
@@ -137,7 +140,7 @@ const CourseModule = () => {
                       placeholder="Ask Your Doubt"
                       className="bg-black w-[80%] rounded-xl p-[10px] h-[100px] text-[18px] text-[#779daa] border-[#202329] border-[1px] "
                     />
-                    <button
+                 <button
                       className="bg-[#6674cc] w-[80px] h-[50px] flex justify-center items-center rounded-2xl mt-[15px] ml-[15px]"
                       onClick={() =>
                         reviewSubmitHandler()

@@ -40,7 +40,7 @@ const Signup = () => {
     if(isAuthenticated===true ){
       toast.success('successfull register')
     setTimeout(()=>{
-      navigate('/')
+      navigate('/profile')
     },3000)
     dispatch({
       type: REGISTER_RESET,

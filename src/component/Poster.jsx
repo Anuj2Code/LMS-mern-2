@@ -1,5 +1,5 @@
 import React from 'react'
-import io from '../Images//blue-fire-png.webp'
+import io from '../Images/blue-fire-png.webp'
 
 const Poster = () => {
   return (

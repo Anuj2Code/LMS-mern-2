@@ -42,9 +42,6 @@ const Home = () => {
 
   useEffect(() => {
     setload(loading);
-    setTimeout(()=>{
-     setload(loading)
-    },8000)
   }, [loading]);
 
   useEffect(() => {
@@ -158,11 +155,21 @@ const Home = () => {
       <div className="w-[100vw] h-[350px] flex flex-col justify-center items-center gap-5">
         <div><p className="text-[#abafb5] text-[20px] font-medium">50+ POWERFUL IN-BROWSER IDE TEMPLATES TO PRACTICE ON</p></div>
         <div className="flex gap-[25px]">
+         <div className="tooltip tooltip-info" data-tip="CSS">
          <img className='hover:scale-125 duration-150 ' src={css} alt="" />
-          <img className='hover:scale-125 duration-150' src={js} alt="" />
+         </div>
+         <div className="tooltip tooltip-success" data-tip="Javascript">
+         <img className='hover:scale-125 duration-150' src={js} alt="" />
+         </div>
+          <div className="tooltip tooltip-success" data-tip="Vue">
           <img className='hover:scale-125 duration-150' src={vue} alt="" />
+          </div>
+          <div className="tooltip tooltip-error" data-tip="Angular">
           <img className='hover:scale-125 duration-150' src={Ang} alt="" />
+          </div>
+          <div className="tooltip tooltip-info" data-tip="React">
           <img className='hover:scale-125 duration-150' src={react} alt="" />
+          </div>
         </div>
       </div>
       <h1 className="h-[150px] w-[100%] mt-[18px] text-white text-center text-[35px] font-semibold">What would you like to <span className="text-[#6e96cf]">learn?</span></h1>
