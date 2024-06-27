@@ -24,7 +24,11 @@ USER_BOOKS_DEATILS_SUCCESS,
 BOOKS_EMAIL_FAIL,
 BOOKS_EMAIL_REQUEST,
 BOOKS_EMAIL_SUCCESS,
-BOOKS_EMAIL_REST
+BOOKS_EMAIL_REST,
+DELETE_BOOKS_DEATILS,
+DELETE_BOOKS_DEATILS_FAIL,
+DELETE_BOOKS_DEATILS_SUCCESS,
+DELETE_BOOKS_DEATILS_REST
 }
 from '../constants/Books'
 
@@ -221,5 +225,37 @@ export const booksReducer = (state = { books: [] }, action) => {
       default:
         return state;
   
+    }
+  };
+
+  export const booksDelete = (state = {}, action) => {
+    switch (action.type) {
+      case DELETE_BOOKS_DEATILS:
+        return {
+          ...state,
+          loading: true,
+        };
+      case DELETE_BOOKS_DEATILS_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          isDeleted: action.payload,
+          ok1:true
+        };
+      case DELETE_BOOKS_DEATILS_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+          ok1:false
+        };
+        case DELETE_BOOKS_DEATILS_REST:
+          return {
+            ...state,
+            success: false,
+            ok1:false
+          }
+      default:
+        return state;
     }
   };

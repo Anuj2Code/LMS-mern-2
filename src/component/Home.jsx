@@ -34,7 +34,7 @@ import Asked from "./Asked";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const [load, setload] = useState(false);
+  const [load, setload] = useState(true);
 
   const { loading, course, courseCount } = useSelector(
     (state) => state.Allcourse
@@ -61,7 +61,7 @@ const Home = () => {
   }, [dispatch]);
   return (
     <>
-      {load?  <div className="fixed top-0 bottom-0 h-[100vh] w-[100vw] bg-black  flex justify-center items-center flex-col-reverse gap-[10px] ">
+      {load? <div className="fixed top-0 bottom-0 h-[100vh] w-[100vw] bg-black  flex justify-center items-center flex-col-reverse gap-[10px] ">
       <div className="relative top-[150px]">
        <HashLoader
          color={"#ffffff"}

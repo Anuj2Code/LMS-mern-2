@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { getapniBooks,deleteBooks } from "../Actions/Books";
 import Footer from "./Footer";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {DELETE_BOOKS_DEATILS_REST} from '../constants/Books'
 const MyAd = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { usebook } = useSelector((state) => state.apni);
+  const {ok1} = useSelector((state)=> state.bkdel)
   const user = JSON.parse(localStorage.getItem("user"));
-  const [del,setdel] = useState("")
-  console.log(del);
   let id = "";
   if (!user) {
     id = null;
@@ -20,12 +21,22 @@ const MyAd = () => {
 
   useEffect(() => {
     dispatch(getapniBooks(id));
+  }, [dispatch]);
+
+  const dele=(del)=>{
     dispatch(deleteBooks(del));
-  }, [dispatch,del]);
+    dispatch({
+      type: DELETE_BOOKS_DEATILS_REST,
+    });
+  }
 
 
+if(ok1){
+  toast.success("Book deleted successfully")
+}
   return (
     <>
+    <ToastContainer theme="dark" />
       <h1 className="w-[100%] text-[35px] font-semibold text-blue-500 text-center mt-[20px]">
         My AD
       </h1>
@@ -67,7 +78,7 @@ const MyAd = () => {
                       </span>
                     </p>
                   </div>
-                  <button className="btn btn-circle btn-outline m-[10px]" onClick={()=> setdel(i._id)}>
+                  <button className="btn btn-circle btn-outline m-[10px]" onClick={()=> dele(i._id)}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6"

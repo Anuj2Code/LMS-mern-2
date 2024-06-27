@@ -45,7 +45,7 @@ const Payment = () => {
         },
       };
       const { data } = await axios.post(
-        "http://localhost:8800/api/payment/payment/process",
+        "https://lms-mern-3.onrender.com/api/payment/payment/process",
         paymentData,
         config
       );
@@ -74,6 +74,7 @@ const Payment = () => {
           };
           console.log(obj);
           dispatch(CreateOr(obj,id))
+          Navigate("/mycourses");
         } else {
           toast.error("There's some issue while processing payment ");
         }
@@ -87,7 +88,7 @@ const Payment = () => {
     <>
     <ToastContainer />
     <div className="mt-[1px] bg-red-200 z-0 h-[0px]">
-      {" "}
+     <h1 className="w-[100%] text-[30px] relative top-[15px] font-medium text-green-500  text-center">Test Mode</h1>
     </div>
     <div className="h-[100vh] flex justify-center items-center  ">
       <form action="" className=" bg-[#202329] rounded-2xl shadow-lg shadow-blue-500/30 w-[30%] h-[70%]" onSubmit={(e) => submitHandler(e)}>

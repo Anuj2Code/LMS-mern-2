@@ -7,6 +7,7 @@ import im from "../Images/call.png";
 import "animate.css";
 import { userDetail } from "../Actions/Auth";
 import { Link } from "react-router-dom";
+import Policy from "./Policy";
 
 const OldDetail = () => {
   const dispatch = useDispatch();
@@ -88,7 +89,7 @@ const send=()=>{
           </div>
           <div className="">
             <div className="min-h-[100vh]  max-[1030px]:w-[83vw]  max-[1030px]:rounded-2xl  items-center rounded-b-2xl shadow-lg shadow-blue-600/50 w-[40vw] bg-[#2d2d2e] flex flex-col gap-[20px]  justify-center ">
-              <div className="flex gap-[20px]">
+              <div className="flex gap-[20px]  mt-[25px]">
                 <div>
                   <img
                     src={user && user.data && user.data.avatar.url}
@@ -101,9 +102,12 @@ const send=()=>{
                     }}
                   />
                 </div>
-                <div onClick={()=> send()}>
-                <span className="text-white text-[32px] hover:text-blue-600 hover:cursor-pointer hover:underline">
+                <div onClick={()=> send()} className="flex flex-col">
+                <span className=" text-[32px] text-blue-600 ">
                     {user && user.data && user.data.username} 
+                  </span>
+                  <span className=" hover:cursor-pointer  hover:underline">
+                    view details
                   </span>
                 </div>
               </div>
@@ -139,7 +143,7 @@ const send=()=>{
                   {books.description}
                 </p>
               </div>
-              <div className="w-[100%] flex justify-center mt-[15px]">
+              <div className="w-[100%] flex justify-center mt-[15px] mb-[20px]">
                 <button className="h-[50px] text-[20px] w-[60%] bg-green-700 hover:bg-green-500 text-white rounded-2xl">
                   <a href={`//api.whatsapp.com/send?phone=${books.MobileNumber}`} >
                     Whatsapp
@@ -153,7 +157,7 @@ const send=()=>{
           <h1 className="text-[40px] w-[100%] text-center text-green-500 font-semibold">
             Similar Used Books
           </h1>
-          <div className="flex flex-wrap justify-center gap-y-[40px] gap-x-[40px] mt-[50px] ">
+          <div className="flex flex-wrap justify-center gap-y-[40px] gap-x-[40px] mt-[50px] mb-[25px]">
             {book &&
               book.map((i) => {
                 return (
@@ -191,6 +195,7 @@ const send=()=>{
                 );
               })}
           </div>
+          <Policy/>
         </div>
       </div>
       </div>

@@ -71,7 +71,7 @@ export const CourseReducer = (state = { course: [] }, action) => {
       case NEW_REVIEW_SUCCESS:
         return {
           loading: false,
-          success: action.payload,
+          success: action.payload.data.lectures,
           ok:true
         };
       case NEW_REVIEW_FAIL:

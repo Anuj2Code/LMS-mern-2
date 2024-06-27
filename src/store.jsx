@@ -6,7 +6,7 @@ import {CourseReducer,courseDetailsReducer,newReviewReducer,reviewDelete} from '
 import {loginReducer,forgotPasswordReducer,allUsersReducer,userDetailsReducer,updateReducer,contactReducer} from  './reducers/Auth'
 import {createOrder,MyOrder} from './reducers/Order'
 import { NewsReducer } from "./reducers/News";
-import {booksReducer,booksDetailsReducer,oldBooksReducer,bookoldDetailsReducer,similarBooksReducer,uploadAD,userBooksReducer,emailReducer} from './reducers/Books'
+import {booksReducer,booksDetailsReducer,oldBooksReducer,bookoldDetailsReducer,similarBooksReducer,uploadAD,userBooksReducer,emailReducer,booksDelete} from './reducers/Books'
 
 const reducer = combineReducers({
  Allcourse:CourseReducer,
@@ -29,7 +29,8 @@ const reducer = combineReducers({
  apni:userBooksReducer,
  em:emailReducer,
  update:updateReducer,
- contact:contactReducer
+ contact:contactReducer,
+ bkdel:booksDelete,
 })
 
 let initialState = {}

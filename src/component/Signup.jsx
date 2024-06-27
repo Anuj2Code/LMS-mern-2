@@ -36,7 +36,6 @@ const Signup = () => {
     myForm.set("email",email);
     dispatch(register(myForm));
   }
-
     if(isAuthenticated===true ){
       toast.success('successfull register')
     setTimeout(()=>{

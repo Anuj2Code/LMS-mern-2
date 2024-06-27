@@ -15,10 +15,9 @@ import Footer from "./Footer";
 import co from '../Images/course.png'
 import { motion, AnimatePresence } from "framer-motion";
 import cross from "../Images/close.png";
-
+import {DELETE_REVIEW_RESET,NEW_REVIEW_RESET} from '../constants/Cour'
 const CourseModule = () => {
   const location = useLocation();
-  let arr = [];
   const id = location.pathname.split("/")[2];
   const dispatch = useDispatch();
   const [curVide, setVid] = useState(0);
@@ -26,11 +25,13 @@ const CourseModule = () => {
   const [reply, setRep] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const { loading, courses } = useSelector((state) => state.details);
+  const { ok, success,loading} = useSelector((state) => state.ques);
+  const { ok1 } = useSelector((state) => state.del);
+  const { courses } = useSelector((state) => state.details);
   let maId = courses && courses.lectures && courses.lectures[curVide]?._id;
 
   const [lectId, setLectId] = useState(maId);
-
+  console.log(success);
   useEffect(() => {
     setLectId(maId);
   });
@@ -44,6 +45,10 @@ const CourseModule = () => {
   }
   const deleteReview = (lectId) => {
     dispatch(reviewDel(Courseid, id1, lectId));
+    dispatch({
+      type: DELETE_REVIEW_RESET
+    });
+    toast.success("QNA deleted")
   };
 
   useEffect(() => {
@@ -67,14 +72,19 @@ const CourseModule = () => {
  const [id5,setid5] = useState("")
 
  const reviewSubmitHandler = () => {
+  if(ques === "" && reply==="") return toast.error("Please drop your question")
   const myForm = new FormData();
   console.log(id5);
   myForm.set("ques", ques);
   myForm.set("reply", reply);
   dispatch(newReview(myForm, id, lectId, id5, id1, username, url));
   setQues("");
+  dispatch({
+    type: NEW_REVIEW_RESET
+  });
+  toast.success("QNA submitted ");
 }; 
-
+  
 
   const [quesId, setques] = useState("");
   const [slide, setSlide] = useState(false);
@@ -86,15 +96,17 @@ const CourseModule = () => {
     dispatch(addNotes(myForm, id, id1, lectId, quesId));
     setTitle("");
     setDescription("");
+    toast.success("Key Points added");
   };
 
-  
   const deleteNo = () => {
     dispatch(removeNotes(id, id1, lectId, quesId));
+    toast.success("key Points deleted")
   };
 
   return (
     <>
+    <ToastContainer theme="dark" />
       <div className="flex gap-[25px] w-[100vw] ">
         <div className="flex flex-col w-[75%]">
           <div className="ml-[25px] mt-[15px] ">
@@ -163,7 +175,126 @@ const CourseModule = () => {
                       </svg>
                     </button>
                   </div>
-                  <div>
+               {success!==undefined?    <div>
+                    {success &&
+                      success[curVide]?.question.map((i) => {
+                        return (
+                          <div className="card w-[50%] bg-base-100 shadow-xl">
+                            <div className="card-body">
+                              <div className="flex gap-[10px]">
+                                <img
+                                  className="rounded-full w-[39px] h-[39px]"
+                                  src={i.url}
+                                  alt="Shoes"
+                                />
+                                <h2 className="card-title">{i.name}</h2>
+                                {id1 === i.user ? (
+                                  <button
+                                    className="btn rounded-xl"
+                                    onClick={() =>
+                                      document
+                                        .getElementById("my_modal_5")
+                                        .showModal()
+                                    }
+                                  >
+                                    Delete
+                                  </button>
+                                ) : (
+                                  ""
+                                )}
+                                <dialog
+                                  id="my_modal_5"
+                                  className="modal modal-bottom sm:modal-middle"
+                                >
+                                  <div className="modal-box">
+                                    <h3 className="font-bold text-lg">
+                                      Do you want to delete it ?
+                                    </h3>
+                                    <div className="modal-action flex ">
+                                      <form method="dialog">
+                                        {/* if there is a button in form, it will close the modal */}
+                                        <button
+                                          className="btn bg-red-800 rounded-2xl hover:bg-red-600 mr-[20px]"
+                                          onClick={() => deleteReview(lectId)}
+                                        >
+                                          Delete
+                                        </button>
+                                        <button className="btn rounded-2xl">
+                                          close
+                                        </button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </dialog>
+                                {/* Open the modal using document.getElementById('ID').showModal() method */}
+                                {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                                {id1 !== i.user ? (
+                                  <div onClick={()=> setid5(i._id)}>
+                                      <button
+                                    className="btn rounded-xl text-[18px]"
+                                    onClick={() =>
+                                      document
+                                        .getElementById("my_modal_4")
+                                        .showModal()
+                                    }
+                                  >
+                                    Reply
+                                  </button>
+                                  </div>
+                                ) : (
+                                  ""
+                                )}
+                                <dialog id="my_modal_4" className="modal">
+                                  <div className="modal-box w-11/12 max-w-5xl">
+                                    <textarea
+                                      type="text"
+                                      value={reply}
+                                      onChange={(e) => setRep(e.target.value)}
+                                      placeholder="Reply ..."
+                                      className="bg-black w-[80%] rounded-xl p-[10px] h-[100px] text-[#779daa] border-[#202329] border-[1px] "
+                                    />
+                                    <div className="modal-action">
+                                      <form method="dialog">
+                                        <button
+                                          className="btn bg-red-800 rounded-2xl hover:bg-red-600 mr-[20px]"
+                                          onClick={() =>
+                                            reviewSubmitHandler()
+                                          }
+                                        >
+                                          Submit
+                                        </button>
+                                        <button className="btn rounded-2xl">
+                                          Close
+                                        </button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </dialog>
+                              </div>
+                              <p className="text-[18px]">{i.ques}</p>
+                              {i.reply ? (
+                                <div className="flex ml-[35px] gap-[10px] mt-[10px]">
+                                  <h1 className="text-[#7f8385] relative bottom-2">
+                                    reply
+                                  </h1>
+                                  <div className="flex gap-[10px]">
+                                    {" "}
+                                    <img
+                                      className="rounded-full w-[39px] h-[39px]"
+                                      src={li}
+                                      alt="Shoes"
+                                    />
+                                    <p className="text-[18px]">{i.reply}</p>
+                                  </div>
+                                </div>
+                              ) : (
+                                ""
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div>: <div>
                     {courses &&
                       courses.lectures &&
                       courses.lectures[curVide]?.question.map((i) => {
@@ -283,7 +414,7 @@ const CourseModule = () => {
                           </div>
                         );
                       })}
-                  </div>
+                  </div>}
                 </div>
               </div>
               <input

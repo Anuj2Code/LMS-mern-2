@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllOldBooks } from "../Actions/Books";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
+import Policy from "./Policy";
 
 const Oldbooks = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const Oldbooks = () => {
           Featured Used Books
         </h1>
       </div>
-      <div className="min-h-[160vh] flex flex-wrap gap-x-[100px] gap-y-[25px] ml-[250px] mt-[40px]  max-[450px]:right-[70vw]  max-[590px]:right-[60vw] max-[711px]:right-[23vw] relative">
+      <div className="min-h-[160vh] flex flex-wrap gap-x-[100px] gap-y-[25px] ml-[250px] mt-[60px]  max-[450px]:right-[70vw]  max-[590px]:right-[60vw] max-[711px]:right-[23vw] relative">
         {oldbooks &&
           oldbooks.map((i) => {
             return (
@@ -54,14 +55,14 @@ const Oldbooks = () => {
                 </figure>
                 <Link to={`/detOldBooks/${i._id}`}>
                 <div className="card-body flex flex-col gap-[18px]">
-                  <h2 className="card-title text-[25px]">{i.title}</h2>
+                  <h2 className="card-title text-[20px]">{i.title}</h2>
                   <div className="flex ">
                     <p className="text-[22px] text-red-500">City</p>
-                    <p className="text-blue-600 text-[18px]">{i.city}</p>
+                    <p className="text-blue-600 text-[20px]">{i.city}</p>
                   </div>
                   <div className="flex">
                     <p className="text-green-500 text-[20px]">₹ {i.price}</p>
-                    <p className="text-[22px]">{i.priceType}</p>
+                    <p className="text-[18px]">{i.priceType}</p>
                   </div>
                   <div className="flex gap-[65px]">
                     <h1 className="text-[22px]"> Posted At</h1>
@@ -77,6 +78,7 @@ const Oldbooks = () => {
             );
           })}
       </div>
+      <Policy/>
       <Footer/>
     </>
   );
