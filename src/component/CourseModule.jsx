@@ -25,13 +25,15 @@ const CourseModule = () => {
   const [reply, setRep] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const { ok, success,loading} = useSelector((state) => state.ques);
+  const { ok, success,succes} = useSelector((state) => state.ques);
+  const { data} = useSelector((state) => state.not);
   const { ok1 } = useSelector((state) => state.del);
+
   const { courses } = useSelector((state) => state.details);
   let maId = courses && courses.lectures && courses.lectures[curVide]?._id;
 
   const [lectId, setLectId] = useState(maId);
-  console.log(success);
+  console.log(data);
   useEffect(() => {
     setLectId(maId);
   });
@@ -482,7 +484,102 @@ const CourseModule = () => {
                 </div>
               </div>
             </dialog>
-            <div className="">
+          {data!==undefined ? <div className="">
+              {data &&
+                      data[curVide]?.notes.map((i) => {
+                  return (
+                    <div className="card w-96 bg-[#202329] m-[10px] rounded-2xl shadow-xl">
+                      <div className="card-body">
+                        <div className="flex gap-2">
+                          <h2 className="card-title text-blue-500 mb-[10px]">
+                            {i.title && i.title}
+                          </h2>
+                          <div onClick={() => reviewSubmitHandler1()}>
+                            <div
+                              onClick={() => setques(i._id)}
+                              className="flex gap-3 ml-[35px]"
+                            >
+                              <button
+                                className="btn w-[75px]"
+                                onClick={() =>
+                                  document
+                                    .getElementById("my_modal_56")
+                                    .showModal()
+                                }
+                              >
+                                Edit
+                              </button>
+                              <div className="">
+                                <dialog
+                                  id="my_modal_80"
+                                  className="modal modal-bottom sm:modal-middle"
+                                >
+                                  <div className="modal-box">
+                                    <p className="py-4">
+                                      Do you want to delete it ?
+                                    </p>
+                                    <div
+                                      className="modal-action"
+                                      onClick={() => setques(i._id)}
+                                    >
+                                      <form method="dialog">
+                                        {/* if there is a button in form, it will close the modal */}
+                                        <button
+                                          className="btn bg-red-800 hover:bg-red-500 rounded-2xl mr-[10px] "
+                                          onClick={() => deleteNo()}
+                                        >
+                                          delete
+                                        </button>
+                                        <button className="btn rounded-2xl">
+                                          close
+                                        </button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </dialog>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <dialog id="my_modal_56" className="modal">
+                          <div className="modal-box w-11/12 max-w-5xl">
+                            <div className="flex flex-col gap-[10px]">
+                              <textarea
+                                type="text"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                placeholder="Title ..."
+                                className="bg-black w-[80%] rounded-xl p-[10px] h-[60px] text-[#779daa] border-[#202329] border-[1px] "
+                              />
+                              <textarea
+                                type="text"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                                placeholder="Description ..."
+                                className="bg-black w-[80%] rounded-xl p-[10px] h-[100px] text-[#779daa] border-[#202329] border-[1px] "
+                              />
+                            </div>
+                            <div className="modal-action">
+                              <form method="dialog">
+                                <button
+                                  className="btn bg-red-800 rounded-2xl hover:bg-red-600 mr-[20px]"
+                                  onClick={() => reviewSubmitHandler1(i._id)}
+                                >
+                                  Add
+                                </button>
+                                <button className="btn">Close</button>
+                              </form>
+                            </div>
+                          </div>
+                        </dialog>
+                        <p>{i.description && i.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div> :
+              <div className="">
               {courses &&
                 courses.lectures &&
                 courses.lectures[curVide]?.notes.map((i) => {
@@ -578,6 +675,7 @@ const CourseModule = () => {
                   );
                 })}
             </div>
+          }
           </div>
         </div>
        <div className="min-[1285px]:hidden flex w-[100%] justify-end p-[10px] mt-[65px] mr-[50px] max-[450px]:w-[250px]">

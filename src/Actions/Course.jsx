@@ -12,7 +12,11 @@ NEW_REVIEW_REQUEST,
 NEW_REVIEW_SUCCESS,
 DELETE_REVIEW_FAIL,
 DELETE_REVIEW_REQUEST,
-DELETE_REVIEW_SUCCESS
+DELETE_REVIEW_SUCCESS,
+NEW_NOTES_FAIL,
+NEW_NOTES_REQUEST,
+NEW_NOTES_SUCCESS,
+NEW_NOTES_RESET
 } from "../constants/Cour";
 
 export const getAllCourse =(keyword="" , currentPage = 1, category="") =>
@@ -107,19 +111,19 @@ export const getAllCourse =(keyword="" , currentPage = 1, category="") =>
 
   export const addNotes = (myForm,id,id1,lectId,quesId) => async (dispatch) => {
     try {
-      dispatch({ type: NEW_REVIEW_REQUEST });
+      dispatch({ type: NEW_NOTES_REQUEST });
       const config = {
         headers: { "Content-Type": "application/json" },
       };
       const { data } = await axios.post(`https://lms-mern-3.onrender.com/api/course/notes?id=${id}&id1=${id1}&id2=${lectId}&id3=${quesId}`, myForm, config);
       console.log(data);
       dispatch({
-        type: NEW_REVIEW_SUCCESS,
+        type: NEW_NOTES_SUCCESS,
         payload: data,
       });
     } catch (error) {
       dispatch({
-        type: NEW_REVIEW_FAIL,
+        type: NEW_NOTES_FAIL,
         payload: error.response.data.message,
       });
     }
