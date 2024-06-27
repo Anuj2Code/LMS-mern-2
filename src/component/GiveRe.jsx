@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { newReview } from "../Actions/Course";
+import { Review } from "../Actions/Course";
 import Footer from "./Footer";
 
 const GiveRe = () => {
@@ -14,7 +14,7 @@ const GiveRe = () => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   let url = "";
-const {success,error} = useSelector((state)=> state.ques);
+  const { success, error } = useSelector((state) => state.rv);
   const user = JSON.parse(localStorage.getItem("user"));
   let id = "";
   let username = "";
@@ -34,10 +34,11 @@ const {success,error} = useSelector((state)=> state.ques);
     myForm.set("comment", comment);
     myForm.set("CourseID", ID);
     myForm.set("url", url);
-    dispatch(newReview(myForm, id, username));
+    dispatch(Review(myForm, id,username));
+
   };
 
-  if(success){
+  if (success) {
     toast.success("Review submitted");
   }
 
@@ -50,11 +51,11 @@ const {success,error} = useSelector((state)=> state.ques);
   return (
     <>
       <ToastContainer theme="dark" />
-      <h1 className="w-[100%] text-center text-[35px] font-serif text-blue-600">
+      <h1 className="w-[100%] text-center text-[35px] font-serif text-red-600 font-semibold mt-[15px]">
         Rate Our Course
       </h1>
       <div className="w-[100%] h-[100vh] flex justify-center mt-[55px] ">
-        <div className=" h-[60%] w-[350px] bg-white rounded-2xl shadow-2xl shadow-blue-500/70">
+        <div className=" h-[60%] w-[350px] bg-[#29caad] rounded-2xl shadow-2xl shadow-blue-500/70">
           <div className="w-[100%] flex items-center justify-center relative mt-[55px]">
             <Rating
               precision={0.5}
@@ -73,12 +74,17 @@ const {success,error} = useSelector((state)=> state.ques);
               onChange={(e) => setComment(e.target.value)}
             ></textarea>
           </div>
-            <div className=" flex justify-center">
-            <button className="w-[180px] rounded-2xl h-[40px] bg-blue-800 text-white"  onClick={reviewSubmitHandler}>Submit</button>
-            </div>
+          <div className=" flex justify-center">
+            <button
+              className="w-[180px] rounded-2xl h-[40px] bg-blue-800 text-white"
+              onClick={()=> reviewSubmitHandler()}
+            >
+              Submit
+            </button>
+          </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

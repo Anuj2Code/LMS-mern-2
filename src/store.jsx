@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import {thunk} from "redux-thunk";
 import { composeWithDevToolsDevelopmentOnly } from '@redux-devtools/extension';
 // import { composeWithDevTools } from "redux-devtools-extension";
-import {CourseReducer,courseDetailsReducer,newReviewReducer,reviewDelete,newNotesReducer} from './reducers/Course'
+import {CourseReducer,courseDetailsReducer,newReviewReducer,reviewDelete,newNotesReducer,ReviewReducer} from './reducers/Course'
 import {loginReducer,forgotPasswordReducer,allUsersReducer,userDetailsReducer,updateReducer,contactReducer} from  './reducers/Auth'
 import {createOrder,MyOrder} from './reducers/Order'
 import { NewsReducer } from "./reducers/News";
@@ -31,7 +31,8 @@ const reducer = combineReducers({
  update:updateReducer,
  contact:contactReducer,
  bkdel:booksDelete,
- not:newNotesReducer
+ not:newNotesReducer,
+ rv:ReviewReducer
 })
 
 let initialState = {}

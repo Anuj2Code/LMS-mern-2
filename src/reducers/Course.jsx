@@ -16,7 +16,11 @@ DELETE_REVIEW_RESET,
 NEW_NOTES_FAIL,
 NEW_NOTES_REQUEST,
 NEW_NOTES_SUCCESS,
-NEW_NOTES_RESET
+NEW_NOTES_RESET,
+REVIEW_FAIL,
+REVIEW_REQUEST,
+REVIEW_SUCCESS,
+REVIEW_RESET
 } from  '../constants/Cour'
 
 export const CourseReducer = (state = { course: [] }, action) => {
@@ -96,6 +100,37 @@ export const CourseReducer = (state = { course: [] }, action) => {
     }
   };
 
+  export const ReviewReducer = (state = {}, action) => {
+    switch (action.type) {
+      case REVIEW_REQUEST:
+        return {
+          ...state,
+          loading: true,
+        };
+      case REVIEW_SUCCESS:
+        return {
+          loading: false,
+          success: action.payload,
+          ok:true
+        };
+      case REVIEW_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+          ok:false,
+        };
+      case REVIEW_RESET:
+        return {
+          ...state,
+          success: false,
+          ok:false
+        };
+      default:
+        return state;
+    }
+  };
+
   export const reviewDelete = (state = {}, action) => {
     switch (action.type) {
       case DELETE_REVIEW_REQUEST:
@@ -146,6 +181,12 @@ export const CourseReducer = (state = { course: [] }, action) => {
           loading: false,
           error: action.payload,
         };
+        case NEW_NOTES_RESET:
+          return {
+            ...state,
+            success: false,
+            ok1:false
+          }
       default:
         return state;
     }

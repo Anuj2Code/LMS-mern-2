@@ -16,7 +16,11 @@ DELETE_REVIEW_SUCCESS,
 NEW_NOTES_FAIL,
 NEW_NOTES_REQUEST,
 NEW_NOTES_SUCCESS,
-NEW_NOTES_RESET
+NEW_NOTES_RESET,
+REVIEW_FAIL,
+REVIEW_REQUEST,
+REVIEW_SUCCESS,
+REVIEW_RESET
 } from "../constants/Cour";
 
 export const getAllCourse =(keyword="" , currentPage = 1, category="") =>
@@ -86,7 +90,29 @@ export const getAllCourse =(keyword="" , currentPage = 1, category="") =>
       console.log(error);
       dispatch({
         type: NEW_REVIEW_FAIL,
-        payload: error.response.data.message,
+        payload: error,
+      });
+    }
+  };
+
+  export const Review = (myForm,id, username) => async (dispatch) => {
+    try {
+      dispatch({ type: REVIEW_REQUEST });
+      const config = {
+        headers: { "Content-Type": "application/json" },
+      };
+
+      const { data } = await axios.post(`https://lms-mern-3.onrender.com/api/course/give?id=${id}&username=${username}`, myForm, config);
+      console.log(data);
+      dispatch({
+        type: REVIEW_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: REVIEW_FAIL,
+        payload: error,
       });
     }
   };
